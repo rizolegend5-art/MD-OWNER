@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>RIZO Cloud Panel — Owner</title>
+<link rel="icon" href="https://i.postimg.cc/65n8yzcp/rizo-md.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ===== same iron/steel/molten system as the pair site ===== */
+  --bg:#05080f;--bg2:#0a1220;--card:rgba(14,22,40,.72);--card2:rgba(22,34,58,.78);--solid:#0c1424;--ink:#0a0f1c;
+  --steel1:#8fa9c9;--steel2:#c8d6e8;--steel3:#e8eef7;
+  --iron:#1a2436;--molten:#ff6b35;--molten2:#ff9547;--molten3:#ffc56e;
+  --blue:#4da8ff;--blue2:#7cc4ff;--cyan:#2fd8e8;--green:#2fe39b;--red:#ff5d7a;--gold:#ffd166;
+  --pink:#ff6fa3;--pink2:#ffb3d1;--violet:#a78bfa;
+  --accent:linear-gradient(100deg,var(--molten) 0%,var(--molten2) 50%,var(--molten3) 100%);
+  --line:rgba(143,169,201,.32);--line2:rgba(143,169,201,.14);
+  --text:#e6eef9;--muted:#9fb2c8;--dim:#61728c;--glow:rgba(255,107,53,.32);
+  --sans:'Exo 2',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --tech:'Orbitron','Exo 2',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --radius:22px;color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 var(--sans);-webkit-tap-highlight-color:transparent}
+body{min-height:100vh;position:relative;overflow-x:hidden;padding:env(safe-area-inset-top,0) 14px calc(26px + env(safe-area-inset-bottom,0))}
+body{background:
+  radial-gradient(60% 50% at 15% 0%,rgba(255,107,53,.10),transparent 60%),
+  radial-gradient(55% 50% at 100% 10%,rgba(77,168,255,.12),transparent 60%),
+  radial-gradient(60% 60% at 50% 100%,rgba(255,111,163,.08),transparent 60%),
+  linear-gradient(180deg,var(--ink),var(--bg) 40%,var(--bg2))}
+body::before{
+  content:"";position:fixed;inset:-15% -15% auto -15%;height:75vh;z-index:0;pointer-events:none;
+  background:radial-gradient(38% 50% at 12% 15%,rgba(255,111,163,.16),transparent 70%),
+             radial-gradient(42% 55% at 88% 8%,rgba(77,168,255,.18),transparent 70%),
+             radial-gradient(40% 50% at 55% 55%,rgba(167,139,250,.12),transparent 70%);
+  filter:blur(10px);animation:aur 18s ease-in-out infinite alternate;
+}
+@keyframes aur{from{transform:translate3d(-2%,0,0) scale(1)}to{transform:translate3d(2%,3%,0) scale(1.07)}}
+@media (prefers-reduced-motion:reduce){*{animation:none !important}}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto}
+::selection{background:rgba(255,140,190,.4);color:#fff}
+html{scrollbar-width:thin;scrollbar-color:#6f8299 transparent}
+::-webkit-scrollbar{width:9px}::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#8fa9c9,#ff9fc4);border-radius:99px}
+h1,h2,h3{font-family:var(--tech);letter-spacing:.02em}
+
+/* ---------- the "cut" card frame, identical trick to the pair site: conic-gradient border ---------- */
+.cut{position:relative;padding:1.6px;border-radius:var(--radius);
+  background:conic-gradient(from 0deg,var(--steel1),rgba(255,107,53,.35) 25%,var(--steel2) 50%,rgba(77,168,255,.35) 75%,var(--steel1));
+  box-shadow:0 28px 60px -34px rgba(0,0,0,.9),0 2px 0 rgba(255,255,255,.04),inset 0 1px 0 rgba(255,255,255,.1);
+  animation:spinb 16s linear infinite}
+@keyframes spinb{to{--ang:360deg}}
+.cut>.inner{border-radius:calc(var(--radius) - 1.6px);background:linear-gradient(180deg,rgba(10,16,30,.94),rgba(6,10,20,.97));padding:22px}
+
+/* ---------- gate ---------- */
+#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
+.gatecard{width:100%;max-width:400px}
+.gatecard .inner{text-align:center}
+.gatecard img.logo{width:78px;height:78px;border-radius:22px;display:block;margin:0 auto 14px;
+  box-shadow:0 10px 26px -8px var(--glow);border:2px solid rgba(255,170,205,.4)}
+.gatecard h1{margin:0 0 4px;font-size:22px;letter-spacing:.06em;
+  background:linear-gradient(100deg,#fff 0%,var(--pink2) 40%,var(--blue2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.gatecard .sub{color:var(--muted);font-size:12px;margin-bottom:22px;font-family:var(--mono)}
+.field{margin-top:12px;display:flex;align-items:center;border:1px solid var(--line);border-radius:12px;
+  background:linear-gradient(180deg,rgba(6,13,26,.92),rgba(12,22,40,.92));
+  box-shadow:inset 0 2px 6px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05);transition:.2s}
+.field:focus-within{border-color:var(--blue2);box-shadow:inset 0 2px 6px rgba(0,0,0,.6),0 0 0 3px rgba(77,168,255,.18)}
+.field input{flex:1;background:transparent;border:none;outline:none;color:var(--text);padding:13px 14px;font:15px var(--sans)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;cursor:pointer;border:none;border-radius:13px;
+  padding:14px 16px;font:800 14px var(--tech);letter-spacing:.03em;transition:transform .18s,box-shadow .25s,filter .25s;user-select:none}
+.btn:active{transform:scale(.97)}
+.btn-main{width:100%;margin-top:14px;min-height:54px;
+  background:linear-gradient(135deg,#ff7a3d 0%,#ff9547 52%,#ffc56e 100%);color:#1b0c04;
+  box-shadow:0 16px 36px -14px var(--glow),inset 0 1px 0 rgba(255,255,255,.55),inset 0 -3px 0 rgba(120,40,0,.28)}
+.btn-main:hover{filter:brightness(1.06);transform:translateY(-2px)}
+.btn-ghost{background:linear-gradient(180deg,rgba(36,54,82,.65),rgba(10,18,32,.7));color:var(--text);border:1px solid var(--line2)}
+.btn-ghost:hover{border-color:var(--blue2)}
+.btn-blue{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#021427;box-shadow:0 12px 26px -12px rgba(77,168,255,.55)}
+.btn-pink{background:linear-gradient(135deg,var(--pink),var(--pink2));color:#2a0a14;box-shadow:0 12px 26px -12px rgba(255,111,163,.55)}
+.btn-danger{background:linear-gradient(135deg,var(--red),#ff9a7a);color:#2a0a0a}
+.err{color:var(--red);font-size:12.5px;min-height:16px;text-align:center;margin-top:8px;font-family:var(--mono)}
+.hint{text-align:center;color:var(--dim);font-size:11px;margin-top:18px;line-height:1.7;font-family:var(--mono)}
+.hidden{display:none !important}
+
+/* ---------- app shell ---------- */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:18px 2px 8px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:44px;height:44px;border-radius:14px;border:2px solid rgba(255,170,205,.4);box-shadow:0 8px 18px -8px var(--glow)}
+.brand h1{font-size:19px;margin:0;letter-spacing:.05em;
+  background:linear-gradient(100deg,#fff 0%,var(--pink2) 40%,var(--blue2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand .tag{font-size:11px;color:var(--dim);font-family:var(--mono)}
+.clock{font:600 12px var(--mono);color:var(--muted);letter-spacing:.05em}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin:14px 0 18px}
+.stat .inner{padding:15px 12px;text-align:center}
+.stat b{display:block;font:800 24px var(--tech);
+  background:linear-gradient(135deg,var(--blue2),var(--pink2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{font-size:10.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.07em;font-family:var(--mono)}
+
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.toolbar input[type=search]{flex:1;min-width:170px;padding:12px 14px;border-radius:12px;border:1px solid var(--line2);
+  background:linear-gradient(180deg,rgba(6,13,26,.92),rgba(12,22,40,.92));color:var(--text);font:13.5px var(--sans)}
+.toolbar input[type=search]:focus{outline:none;border-color:var(--blue2)}
+select{padding:11px 12px;border-radius:12px;border:1px solid var(--line2);background:var(--solid);color:var(--text);font:13px var(--sans)}
+.btn-sm{padding:10px 14px;font-size:12.5px;border-radius:12px}
+
+/* ---------- bot cards, styled like .srv rows on the pair site ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(262px,1fr));gap:14px}
+.card{position:relative;display:flex;flex-direction:column;gap:4px;cursor:pointer;text-align:left;font-family:var(--sans);
+  padding:15px;border:1px solid var(--line2);border-radius:16px;
+  background:linear-gradient(160deg,rgba(26,40,62,.92),rgba(8,15,28,.96));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),inset 0 -1px 0 rgba(0,0,0,.45);
+  transition:transform .18s,border-color .2s,box-shadow .2s,background .2s}
+.card:hover{transform:translateY(-3px);border-color:var(--pink2);
+  box-shadow:0 18px 34px -18px var(--glow),inset 0 1px 0 rgba(255,255,255,.1)}
+.card .head{display:flex;gap:10px;align-items:center}
+.card img.av{width:44px;height:44px;border-radius:13px;object-fit:cover;border:1px solid var(--line2);flex:none;background:#0d1320}
+.card .name{font-weight:700;font-size:14.5px;line-height:1.25;word-break:break-word;font-family:var(--sans)}
+.card .id{font-size:10.5px;color:var(--dim);font-family:var(--mono)}
+.dot{width:8px;height:8px;border-radius:50%;background:#55607a;display:inline-block;margin-right:5px;flex:none}
+.dot.on{background:var(--green);box-shadow:0 0 10px var(--green);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+.card .row{display:flex;justify-content:space-between;align-items:center;margin-top:9px;font-size:11.5px;color:var(--muted);font-family:var(--mono)}
+.pillrow{display:flex;gap:6px;margin-top:9px;flex-wrap:wrap}
+.pill{font:600 10px var(--mono);padding:4px 9px;border-radius:99px;background:rgba(36,54,82,.6);border:1px solid var(--line2);color:var(--muted)}
+.bignum{font:800 24px var(--tech);background:linear-gradient(135deg,var(--blue2),var(--pink2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.empty{color:var(--dim);text-align:center;padding:60px 10px;font-family:var(--mono);font-size:13px}
+
+/* ---------- edit sheet ---------- */
+#overlay{position:fixed;inset:0;background:rgba(2,4,8,.78);backdrop-filter:blur(3px);display:flex;align-items:flex-end;justify-content:center;z-index:60}
+#overlay.hidden{display:none}
+.sheet{background:linear-gradient(170deg,#0f1726,#070b14);border:1px solid var(--line2);border-radius:24px 24px 0 0;
+  max-width:640px;width:100%;max-height:92vh;overflow:auto;padding:20px 18px calc(24px + env(safe-area-inset-bottom,0))}
+@media(min-width:700px){#overlay{align-items:center}.sheet{border-radius:24px}}
+.sheet h2{margin:0;font-size:18px;letter-spacing:.03em}
+.sheet h3{font-size:12.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--pink2);margin:22px 0 9px;
+  display:flex;align-items:center;gap:6px;font-family:var(--tech)}
+label{display:block;font-size:11.5px;color:var(--dim);margin:12px 0 5px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em}
+input,textarea{width:100%;padding:12px 13px;border-radius:12px;border:1px solid var(--line2);
+  background:linear-gradient(180deg,rgba(6,13,26,.92),rgba(12,22,40,.92));color:var(--text);font:14px var(--sans)}
+input:focus,textarea:focus{outline:none;border-color:var(--blue2)}
+textarea{resize:vertical;min-height:54px;font-family:var(--sans)}
+.row2{display:flex;gap:8px}.row2>*{flex:1}
+.list-row{display:flex;justify-content:space-between;align-items:center;gap:8px;
+  background:linear-gradient(180deg,rgba(36,54,82,.55),rgba(10,18,32,.65));
+  border:1px solid var(--line2);border-radius:12px;padding:9px 11px;margin-top:7px}
+.list-row span{font-size:12px;word-break:break-word;line-height:1.4}
+.tiny{font-size:10.5px;color:var(--dim);font-family:var(--mono)}
+.closebtn{background:var(--solid);color:var(--text);border:1px solid var(--line2);width:36px;height:36px;border-radius:50%;
+  font-size:16px;padding:0;flex:none}
+.sheetTop{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.previewRow{display:flex;align-items:center;gap:10px;margin-top:8px}
+.previewRow img{width:48px;height:48px;border-radius:13px;object-fit:cover;border:1px solid var(--line2);background:#0d1320}
+.colorDots{display:flex;gap:8px;margin-top:7px}
+.colorDots i{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2px solid transparent;display:inline-block;transition:.15s}
+.colorDots i.sel{border-color:#fff;transform:scale(1.14)}
+.danger-box{margin-top:22px;border:1px dashed rgba(255,93,122,.4);border-radius:14px;padding:13px;background:rgba(255,93,122,.05)}
+.danger-box .tiny{color:#ffb0c0}
+
+/* ---------- toast + confetti + floating fx (same vibe as the pair site) ---------- */
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,0);
+  background:linear-gradient(135deg,var(--green),#9be6c9);color:#06261a;
+  padding:11px 18px;border-radius:30px;font:700 13px var(--sans);z-index:99;opacity:0;pointer-events:none;
+  transition:.25s;box-shadow:0 10px 26px -10px rgba(54,211,153,.6)}
+.toast.show{opacity:1;transform:translate(-50%,-6px)}
+.confetti{position:fixed;left:0;top:0;pointer-events:none;z-index:99;font-size:20px;will-change:transform,opacity;
+  animation:burst 1.3s cubic-bezier(.15,.8,.3,1) forwards}
+@keyframes burst{0%{transform:translate3d(0,0,0) scale(.4);opacity:1}100%{transform:translate3d(var(--bx),var(--by),0) scale(1.1) rotate(var(--br));opacity:0}}
+.float-fx{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.float-fx i{position:absolute;bottom:-40px;font-style:normal;opacity:0;animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:.8}90%{opacity:.5}100%{transform:translateY(-108vh) rotate(50deg);opacity:0}}
+</style>
+</head>
+<body>
+
+<div class="float-fx" id="floatFx" aria-hidden="true"></div>
+
+<!-- ======================= GATE ======================= -->
+<div id="gate">
+  <div class="cut gatecard"><div class="inner">
+    <img class="logo" src="https://i.postimg.cc/65n8yzcp/rizo-md.jpg" alt="">
+    <h1>RIZO CLOUD PANEL</h1>
+    <div class="sub">⚙ OWNER ACCESS · FIREBASE LINKED</div>
+    <div class="field"><input id="gatePass" type="password" placeholder="Panel password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <button class="btn btn-main" id="loginBtn" onclick="doLogin()">🔓 KHOL DO</button>
+    <div class="err" id="gateErr"></div>
+    <div class="hint">Pehli dafa koi bhi password likho — wahi set ho jayega (Firebase mein save hota hai).<br>
+    Agle logins mein wahi password daalna hoga. Is link ko kisi ke saath share na karein.</div>
+  </div></div>
+</div>
+
+<!-- ======================= APP ======================= -->
+<div id="app" class="hidden wrap">
+  <div class="topbar">
+    <div class="brand">
+      <img src="https://i.postimg.cc/65n8yzcp/rizo-md.jpg" alt="">
+      <div><h1>RIZO CLOUD PANEL</h1><div class="tag">◆ SAB BOTS · EK JAGAH · LIVE</div></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <span class="clock" id="clock">--:--:--</span>
+      <button class="btn btn-ghost btn-sm" onclick="logout()">LOGOUT</button>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="cut stat"><div class="inner"><b id="sBots">0</b><span>Total Bots</span></div></div>
+    <div class="cut stat"><div class="inner"><b id="sOnline">0</b><span>Online Abhi</span></div></div>
+    <div class="cut stat"><div class="inner"><b id="sNumbers">0</b><span>Numbers Connected</span></div></div>
+    <div class="cut stat"><div class="inner"><b id="sCourses">0</b><span>Courses</span></div></div>
+  </div>
+
+  <div class="toolbar">
+    <input type="search" id="search" placeholder="🔍 Bot naam ya ID se dhoondo…" oninput="render()">
+    <select id="sortBy" onchange="render()">
+      <option value="numbers">Sort: Numbers</option>
+      <option value="recent">Sort: Recent</option>
+      <option value="name">Sort: Naam</option>
+    </select>
+    <button class="btn btn-blue btn-sm" onclick="openGlobal()">📣 GLOBAL BANNER</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div class="empty hidden" id="emptyMsg">
+    <div>🛰️ ABHI KOI BOT CONNECT NAHI HUA</div>
+    <div class="tiny" style="margin-top:8px">Bot ke Railway Variables mein FIREBASE_DB_URL set hone ke 20–25 second baad khud yahan aa jayega.</div>
+  </div>
+</div>
+
+<div id="overlay" class="hidden"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyBpZTHzKrgNU4KLVsfcRuFBzUlgrbTN8kM",
+  authDomain: "dj-box-movie.firebaseapp.com",
+  databaseURL: "https://dj-box-movie-default-rtdb.firebaseio.com",
+  projectId: "dj-box-movie",
+  storageBucket: "dj-box-movie.firebasestorage.app",
+  messagingSenderId: "841030962604",
+  appId: "1:841030962604:web:2a948b5717026494ddfe09",
+  measurementId: "G-7BYFEJNK0Y"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+const DEFAULT_IMG = "https://i.postimg.cc/65n8yzcp/rizo-md.jpg";
+
+(function(){
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const fx = document.getElementById('floatFx');
+  const EM = ['✨','💙','🌸','🧡','💫','🩷'];
+  for(let i=0;i<10;i++){
+    const n=document.createElement('i');
+    n.textContent=EM[i%EM.length];
+    n.style.left=(4+Math.random()*92)+'%';
+    n.style.fontSize=(12+Math.random()*14)+'px';
+    n.style.animationDuration=(14+Math.random()*14)+'s';
+    n.style.animationDelay=(-Math.random()*20)+'s';
+    fx.appendChild(n);
+  }
+})();
+function confettiBurst(){
+  const cx=innerWidth/2, cy=120;
+  for(let k=0;k<16;k++){
+    const b=document.createElement('span'); b.className='confetti';
+    b.textContent=['🎉','💙','✨','🧡','🌸','🩷'][k%6];
+    const a=Math.random()*Math.PI*2, d=90+Math.random()*120;
+    b.style.left=cx+'px'; b.style.top=cy+'px';
+    b.style.setProperty('--bx',Math.cos(a)*d+'px');
+    b.style.setProperty('--by',(Math.sin(a)*d-60)+'px');
+    b.style.setProperty('--br',(Math.random()*240-120)+'deg');
+    document.body.appendChild(b);
+    setTimeout(()=>b.remove(),1400);
+  }
+}
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(window.__tt); window.__tt=setTimeout(()=>t.classList.remove('show'),2000); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+setInterval(()=>{ const c=document.getElementById('clock'); if(c) c.textContent = new Date().toLocaleTimeString('en-GB'); },1000);
+
+async function sha256(t){ const b=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join(''); }
+function friendlyFirebaseError(e){
+  const code = (e && e.code) || '';
+  if(code.includes('PERMISSION_DENIED') || /permission/i.test(e && e.message || '')){
+    return '🚫 Firebase ne ijazat nahi di (Permission denied). Database Rules set karna zaroori hai — neeche "Rules kaise set karein" dekhein.';
+  }
+  if(/Failed to fetch|network|NetworkError/i.test((e && e.message) || '')){
+    return '📡 Firebase tak pahunch nahi payi. Internet check karein, ya Database URL sahi hai confirm karein.';
+  }
+  return '❌ ' + ((e && e.message) || 'Kuch ghalat ho gaya') ;
+}
+async function doLogin(){
+  const pass = document.getElementById('gatePass').value;
+  const err = document.getElementById('gateErr'); err.textContent='';
+  if(!pass){ err.textContent='Password likho.'; return; }
+  const btn = document.getElementById('loginBtn');
+  if(btn){ btn.disabled = true; btn.textContent = '⏳ CHECK HO RAHA HAI…'; }
+  try{
+    const hash = await sha256(pass);
+    const snap = await db.ref('panelAuth/passHash').get();
+    const stored = snap.exists() ? snap.val() : null;
+    if(!stored){ await db.ref('panelAuth/passHash').set(hash); sessionStorage.setItem('rizoPanelOk','1'); openApp(); return; }
+    if(stored !== hash){ err.textContent='❌ Galat password.'; return; }
+    sessionStorage.setItem('rizoPanelOk','1'); openApp();
+  }catch(e){
+    console.error('Login error:', e);
+    err.innerHTML = friendlyFirebaseError(e) + '<br><span style="color:var(--dim)">Technical: '+esc((e&&e.code)||(e&&e.message)||'')+'</span>';
+  }finally{
+    if(btn){ btn.disabled = false; btn.textContent = '🔓 KHOL DO'; }
+  }
+}
+function logout(){ sessionStorage.removeItem('rizoPanelOk'); location.reload(); }
+function openApp(){
+  document.getElementById('gate').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  confettiBurst();
+  listenInstances();
+}
+if(sessionStorage.getItem('rizoPanelOk')==='1') openApp();
+
+let CUR = {};
+function listenInstances(){
+  db.ref('instances').on('value', snap => { CUR = snap.val() || {}; render(); },
+    err => { console.error('Instances read error:', err);
+      document.getElementById('emptyMsg').classList.remove('hidden');
+      document.getElementById('emptyMsg').innerHTML = `<div>🚫 FIREBASE SE DATA NAHI MIL RAHA</div><div class="tiny" style="margin-top:8px">${esc(friendlyFirebaseError(err))}</div>`;
+    });
+}
+function fmtAgo(ts){
+  if(!ts) return 'kabhi nahi';
+  const s=Math.floor((Date.now()-ts)/1000);
+  if(s<60) return s+'s pehle'; if(s<3600) return Math.floor(s/60)+'m pehle';
+  if(s<86400) return Math.floor(s/3600)+'h pehle'; return Math.floor(s/86400)+'d pehle';
+}
+function fmtUptime(s){ s=s||0; const d=Math.floor(s/86400),h=Math.floor((s%86400)/3600),m=Math.floor((s%3600)/60); return d?`${d}d ${h}h`:h?`${h}h ${m}m`:`${m}m`; }
+function isOnline(b){ return b.lastSeen && (Date.now()-b.lastSeen < 70000); }
+
+function render(){
+  const q = (document.getElementById('search').value||'').toLowerCase();
+  const sortBy = document.getElementById('sortBy').value;
+  let ids = Object.keys(CUR).filter(id => {
+    const b=CUR[id]||{}; const name=(b.config&&b.config.name)||b.name||id;
+    return !q || name.toLowerCase().includes(q) || id.toLowerCase().includes(q);
+  });
+  ids.sort((a,b2)=>{
+    const A=CUR[a]||{}, B=CUR[b2]||{};
+    if(sortBy==='numbers') return (B.numbers||0)-(A.numbers||0);
+    if(sortBy==='recent') return (B.lastSeen||0)-(A.lastSeen||0);
+    const nA=((A.config&&A.config.name)||A.name||a).toLowerCase(), nB=((B.config&&B.config.name)||B.name||b2).toLowerCase();
+    return nA.localeCompare(nB);
+  });
+
+  let totalNum=0, online=0, totalCourses=0;
+  ids.forEach(id=>{ const b=CUR[id]||{}; totalNum+=Number(b.numbers||0); if(isOnline(b)) online++;
+    const c=b.courses; totalCourses += Array.isArray(c)?c.length:(c?Object.keys(c).length:0); });
+  countUp('sBots', Object.keys(CUR).length);
+  countUp('sOnline', online);
+  countUp('sNumbers', totalNum);
+  countUp('sCourses', totalCourses);
+
+  document.getElementById('emptyMsg').classList.toggle('hidden', ids.length>0);
+  document.getElementById('grid').innerHTML = ids.map(id=>{
+    const b=CUR[id]||{}; const cfg=b.config||{};
+    const name = cfg.name||b.name||id, img = cfg.image||b.image||DEFAULT_IMG;
+    const online = isOnline(b);
+    return `<div class="card" onclick="openEditor('${id}')">
+      <div class="head">
+        <img class="av" src="${esc(img)}" onerror="this.src='${DEFAULT_IMG}'">
+        <div style="min-width:0"><div class="name"><span class="dot ${online?'on':''}"></span>${esc(name)}</div>
+        <div class="id">${esc(id)}</div></div>
+      </div>
+      <div class="pillrow"><span class="pill">⌨ ${esc(cfg.prefix||b.prefix||'.')}</span><span class="pill">🖥 SRV-${esc(b.server||'1')}</span>${online?'<span class="pill" style="color:#2fe39b;border-color:rgba(47,227,155,.4)">● ONLINE</span>':`<span class="pill">○ ${fmtAgo(b.lastSeen)}</span>`}</div>
+      <div class="row"><span>NUMBERS</span><span class="bignum">${b.numbers||0}</span></div>
+      <div class="row"><span>UPTIME</span><span>${fmtUptime(b.uptimeSec)}</span></div>
+    </div>`;
+  }).join('');
+}
+const counters = {};
+function countUp(elId, target){
+  const el = document.getElementById(elId);
+  const from = counters[elId] || 0; counters[elId] = target;
+  if(from === target){ el.textContent = target; return; }
+  const steps = 14; let i = 0;
+  clearInterval(el.__t);
+  el.__t = setInterval(()=>{ i++; const v = Math.round(from + (target-from)*(i/steps)); el.textContent=v;
+    if(i>=steps){ clearInterval(el.__t); el.textContent=target; } }, 22);
+}
+
+function curId(){ return document.getElementById('sheet').dataset.id; }
+function openEditor(id){
+  const b = CUR[id]||{}; const cfg = b.config||{};
+  const courses = Array.isArray(b.courses) ? b.courses : Object.values(b.courses||{});
+  const aliases = cfg.aliases || {};
+  const sheet = document.getElementById('sheet'); sheet.dataset.id = id;
+  sheet.innerHTML = `
+    <div class="sheetTop">
+      <div><h2>${esc(cfg.name||b.name||id)}</h2><div class="tiny">🆔 ${esc(id)} • ${isOnline(b)?'● ONLINE':'○ '+fmtAgo(b.lastSeen)}</div></div>
+      <button class="closebtn" onclick="closeSheet()">✕</button>
+    </div>
+
+    <h3>🎨 Pair Site &amp; Bot</h3>
+    <label>Naam (pair site ka title + bot ka naam)</label><input id="fName" value="${esc(cfg.name||b.name||'')}">
+    <label>Image URL (pair site ka logo + bot ki profile pic)</label><input id="fImage" oninput="document.getElementById('imgPrev').src=this.value||'${DEFAULT_IMG}'" value="${esc(cfg.image||b.image||'')}">
+    <div class="previewRow"><img id="imgPrev" src="${esc(cfg.image||b.image||DEFAULT_IMG)}" onerror="this.src='${DEFAULT_IMG}'"><span class="tiny">LIVE PREVIEW</span></div>
+    <label>Prefix</label><input id="fPrefix" value="${esc(cfg.prefix||b.prefix||'.')}">
+    <div class="row2" style="margin-top:14px">
+      <button class="btn btn-main" style="margin-top:0" onclick="saveConfig('${id}')">💾 SAVE</button>
+      <button class="btn btn-ghost" onclick="window.open('${esc(b.url||'')}','_blank')" ${b.url?'':'disabled'}>🌐 PAIR SITE</button>
+    </div>
+
+    <h3>🏷 Command Renames</h3>
+    <div id="aliasList">${Object.entries(aliases).map(([a,r])=>aliasRow(a,r)).join('') || '<div class="tiny">Koi nahi</div>'}</div>
+    <div class="row2" style="margin-top:8px">
+      <input id="newAliasFrom" placeholder="naya naam (hi)"><input id="newAliasTo" placeholder="asli command (ping)">
+      <button class="btn btn-ghost btn-sm" onclick="addAlias('${id}')">+ ADD</button>
+    </div>
+
+    <h3>📚 Courses</h3>
+    <div id="courseList">${courses.map((c,i)=>courseRow(c,i)).join('') || '<div class="tiny">Koi nahi</div>'}</div>
+    <label>Title</label><input id="cTitle">
+    <div class="row2"><input id="cPrice" placeholder="Price"><input id="cLink" placeholder="Link"></div>
+    <button class="btn btn-ghost btn-sm" style="margin-top:10px" onclick="addCourse('${id}')">+ COURSE ADD KARO</button>
+
+    <h3>⚡ Quick Actions</h3>
+    <div class="row2">
+      <button class="btn btn-ghost btn-sm" onclick="copyId('${id}')">📋 COPY ID</button>
+      <button class="btn btn-ghost btn-sm" onclick="pingInstance('${id}')">🔁 REFRESH</button>
+    </div>
+
+    <div class="danger-box">
+      <div class="tiny" style="margin-bottom:8px">⚠ DANGER ZONE</div>
+      <div class="row2">
+        <button class="btn btn-danger btn-sm" onclick="restartInstance('${id}')">♻ RESTART</button>
+        <button class="btn btn-danger btn-sm" onclick="removeInstance('${id}')">🗑 HATAO</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('overlay').classList.remove('hidden');
+}
+function aliasRow(a,r){ return `<div class="list-row"><span><b>.${esc(a)}</b> ➜ .${esc(r)}</span><button class="btn btn-ghost btn-sm" onclick="delAlias('${esc(a)}')">✕</button></div>`; }
+function courseRow(c,i){ return `<div class="list-row"><span><b>${esc(c.title)}</b> — ${esc(c.price||'Free')}<br><span class="tiny">${esc(c.link||'')}</span></span><button class="btn btn-ghost btn-sm" onclick="delCourse(${i})">✕</button></div>`; }
+function closeSheet(){ document.getElementById('overlay').classList.add('hidden'); }
+
+async function saveConfig(id){
+  await db.ref('instances/'+id+'/config').update({
+    name: document.getElementById('fName').value.trim(),
+    image: document.getElementById('fImage').value.trim(),
+    prefix: document.getElementById('fPrefix').value.trim() || '.'
+  });
+  toast('✅ Save ho gaya — bot 20 second mein utha lega');
+}
+async function removeInstance(id){
+  if(!confirm('Pakka is bot ko list se hatana hai?')) return;
+  await db.ref('instances/'+id).remove(); closeSheet(); toast('🗑️ Hata diya');
+}
+async function restartInstance(id){
+  if(!confirm('Bot ko abhi restart karna hai?')) return;
+  await db.ref('instances/'+id+'/config').update({ restartRequested: true });
+  toast('♻️ Restart bheja — thodi der mein offline/online hoga');
+}
+function copyId(id){ navigator.clipboard && navigator.clipboard.writeText(id); toast('📋 Copy ho gaya'); }
+function pingInstance(id){ openEditor(id); toast('🔄 Taza ho gaya'); }
+async function addAlias(id){
+  const a=document.getElementById('newAliasFrom').value.trim().toLowerCase();
+  const r=document.getElementById('newAliasTo').value.trim().toLowerCase();
+  if(!a||!r) return toast('Dono field bharo');
+  await db.ref('instances/'+id+'/config/aliases/'+a).set(r);
+  toast('✅ Alias add ho gaya'); openEditor(id);
+}
+async function delAlias(a){ const id=curId(); await db.ref('instances/'+id+'/config/aliases/'+a).remove(); toast('✅ Hata diya'); openEditor(id); }
+async function addCourse(id){
+  const title=document.getElementById('cTitle').value.trim();
+  if(!title) return toast('Title likho');
+  const course={ title, price:document.getElementById('cPrice').value.trim(), link:document.getElementById('cLink').value.trim(), addedAt:Date.now() };
+  const ref=db.ref('instances/'+id+'/courses');
+  const snap=await ref.get();
+  const list=snap.exists() ? (Array.isArray(snap.val())?snap.val():Object.values(snap.val())) : [];
+  list.push(course); await ref.set(list);
+  toast('✅ Course add ho gaya'); openEditor(id);
+}
+async function delCourse(i){
+  const id=curId(); const ref=db.ref('instances/'+id+'/courses');
+  const snap=await ref.get();
+  let list=snap.exists() ? (Array.isArray(snap.val())?snap.val():Object.values(snap.val())) : [];
+  list.splice(i,1); await ref.set(list);
+  toast('✅ Hata diya'); openEditor(id);
+}
+
+async function openGlobal(){
+  const ids = Object.keys(CUR);
+  const first = ids[0]; const cfg = first ? (CUR[first].config||{}) : {};
+  const colors=['#ff6fa3','#4da8ff','#2fe39b','#ffc56e','#a78bfa'];
+  const sheet=document.getElementById('sheet'); sheet.dataset.id='__global__';
+  sheet.innerHTML = `
+    <div class="sheetTop"><h2>📣 GLOBAL BANNER</h2><button class="closebtn" onclick="closeSheet()">✕</button></div>
+    <div class="tiny">Yeh message har connected bot ke pair site par upar dikhega. Khali chhodo = band.</div>
+    <label>Message</label><textarea id="gBanner" placeholder="🎉 Naya update aa gaya! Update karein.">${esc(cfg.banner||'')}</textarea>
+    <label>Rang</label>
+    <div class="colorDots">${colors.map(c=>`<i style="background:${c}" class="${(cfg.bannerColor||colors[0])===c?'sel':''}" onclick="pickColor(this,'${c}')"></i>`).join('')}</div>
+    <input type="hidden" id="gColor" value="${esc(cfg.bannerColor||colors[0])}">
+    <button class="btn btn-main" onclick="saveGlobalBanner()">📤 SAB BOTS PAR BHEJO</button>
+    <div class="tiny" style="margin-top:10px">${ids.length} bot ko bheja jayega.</div>
+  `;
+  document.getElementById('overlay').classList.remove('hidden');
+}
+function pickColor(el,c){ document.querySelectorAll('.colorDots i').forEach(i=>i.classList.remove('sel')); el.classList.add('sel'); document.getElementById('gColor').value=c; }
+async function saveGlobalBanner(){
+  const banner=document.getElementById('gBanner').value.trim();
+  const bannerColor=document.getElementById('gColor').value;
+  const ids=Object.keys(CUR);
+  await Promise.all(ids.map(id=>db.ref('instances/'+id+'/config').update({ banner, bannerColor })));
+  toast(`✅ ${ids.length} bots ko bheja gaya`); closeSheet();
+}
+</script>
+</body>
+</html>
